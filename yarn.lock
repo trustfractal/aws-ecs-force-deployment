@@ -113,11 +113,6 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-3.3.2.tgz"
   "version" "3.3.2"
 
-"wildcard-match@^5.1.2":
-  "integrity" "sha512-qNXwI591Z88c8bWxp+yjV60Ch4F8Riawe3iGxbzquhy8Xs9m+0+SLFBGb/0yCTIDElawtaImC37fYZ+dr32KqQ=="
-  "resolved" "https://registry.npmjs.org/wildcard-match/-/wildcard-match-5.1.2.tgz"
-  "version" "5.1.2"
-
 "xml2js@0.4.19":
   "integrity" "sha512-esZnJZJOiJR9wWKMyuvSE1y6Dq5LCuJanqhxslH2bxM6duahNZ+HMpCLhBQGZkbX6xRf8x1Y2eJlgt2q3qo49Q=="
   "resolved" "https://registry.npmjs.org/xml2js/-/xml2js-0.4.19.tgz"

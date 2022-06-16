@@ -1,24 +1,15 @@
-name: 'S3 cleaner script'
-description: 'Clean your s3 buckets according rules'
+name: 'ECS force new deployment'
+description: 'Forcing new deployments for all services matching tag filters'
 branding:
   icon: 'activity'
   color: 'white'
 inputs:
-  bucket:
-    description: "S3 bucket name"
+  cluster:
+    description: "ECS cluster name"
     required: true
-  include:
-    description: "Include file list"
-    required: false
-  exclude:
-    description: "Exclude file list"
-    required: false
-  older_than:
-    description: "Older than some time"
-    required: false
-  dry_run:
-    description: "Dry run flag"
-    required: false
+  tag_filters:
+    description: "Tag filters for resource API"
+    required: true
 
 runs:
   using: 'node12'

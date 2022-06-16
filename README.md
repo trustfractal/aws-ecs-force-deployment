@@ -1,28 +1,19 @@
-# AWS S3 Cleaner task
+# AWS ECS force deployment
 
-Runs a cleanup process for S3 bucket.
+Run a force deployment for all services with proper tags in cluster
 
-Usage
+Usage:
+
 ``` yaml      
-- name: Get date 30 days ago for S3 cleanup 
-  id: date
-  run: echo "::set-output name=date::$(date -d '30 days ago' +'%Y-%m-%d')"
-
-- name: Run cleanup
-  uses: trustfractal/aws-s3-cleaner@v1.0
+- name: Force new deployment
+  uses: trustfractal/aws-ecs-force-deployment@v1.0
   with:
-    bucket: my-bucket
-    include: |
-      src/**/*.js
-      locale/**/*.po
-    exclude: |
-      vendor/*
-    older_than: ${{steps.date.outputs.date}}
+    cluster: "staging"
+    tag_filters: |
+      { "Application": ["awesome"], "Service": ["staging"] }
 ```
 
 See [action.yml](action.yml) file for the full documentation of this action's inputs and outputs.
-
-For matching, we are using [wildcard-match](https://www.npmjs.com/package/wildcard-match#usage) npm package.
 
 ## License Summary
 
