@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const AWS = require("aws-sdk");
 
-const s3 = new AWS.ECS();
+const ecs = new AWS.ECS();
 const resourcegroupstaggingapi = new AWS.ResourceGroupsTaggingAPI();
 
 const parseJsonFromMultiline = (value) => {
@@ -31,13 +31,24 @@ const main = async () => {
 
   try {
     for (const resourceArn of resourceArns) {
-      console.log(`-> Forcing new deployment for ${resourceArn}`);
-  
-      await s3.updateService({
-        cluster: cluster,
-        service: resourceArn,
-        forceNewDeployment: true,
+      const info = await ecs.describeServices({
+        services: [
+          resourceArn,
+        ],
+        cluster,
       }).promise();
+
+      if (info.services[0].status === "ACTIVE") {
+        console.log(`-> Forcing new deployment for ${resourceArn}`);
+    
+        await ecs.updateService({
+          cluster: cluster,
+          service: resourceArn,
+          forceNewDeployment: true,
+        }).promise();
+      } else {
+        console.log(`-> Service ${resourceArn} is not active, skipping...`);
+      }
     }
   } catch (e) {
     core.setFailed(e);
